@@ -7,10 +7,9 @@ def index(request):
 
 
 def post_detail(request, post_id):
-    for post in posts:
-        if post['id'] == post_id:
-            context = {'post': posts[post_id]}
-            return render(request, 'blog/detail.html', context)
+    if posts_dict.get(post_id):
+        context = {'post': posts_dict[post_id]}
+        return render(request, 'blog/detail.html', context)
     else:
         return render(request, 'blog/notfound.html')
 
@@ -62,3 +61,11 @@ posts = [
                 укутывал их, чтобы не испортились от дождя.''',
     },
 ]
+
+posts_dict = {}
+for post in posts:
+    posts_dict[post['id']] = {'location': post['location'],
+                              'date': post['date'],
+                              'category': post['category'],
+                              'text': post['text'],
+                              }
