@@ -7,8 +7,8 @@ def index(request):
 
 
 def post_detail(request, post_id):
-    if posts_dict.get(post_id):
-        context = {'post': posts_dict[post_id]}
+    if post_dict.get(post_id):
+        context = {'post': post_dict[post_id]}
         return render(request, 'blog/detail.html', context)
     else:
         return render(request, 'blog/notfound.html')
@@ -62,10 +62,4 @@ posts = [
     },
 ]
 
-posts_dict = {}
-for post in posts:
-    posts_dict[post['id']] = {'location': post['location'],
-                              'date': post['date'],
-                              'category': post['category'],
-                              'text': post['text'],
-                              }
+post_dict = dict({post['id']: post for post in posts}.items())
