@@ -8,7 +8,6 @@
   {% for post in posts %}
     <hr>
     {% include "includes/postcard.html" %}
-    <a href="{% url 'blog:post_detail' post.id %}">Читать полный текст</a>
   {% endfor %}
 {% endblock %}
   

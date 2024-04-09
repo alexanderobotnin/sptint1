@@ -1,4 +1,5 @@
 from django.shortcuts import render
+from django.http import Http404
 
 
 def index(request):
@@ -7,11 +8,10 @@ def index(request):
 
 
 def post_detail(request, post_id):
-    if post_dict.get(post_id):
-        context = {'post': post_dict[post_id]}
+    if POST_WORK.get(post_id):
+        context = {'post': POST_WORK[post_id]}
         return render(request, 'blog/detail.html', context)
-    else:
-        return render(request, 'blog/notfound.html')
+    raise Http404("Page not found")
 
 
 def category_posts(request, category_slug):
@@ -62,4 +62,4 @@ posts = [
     },
 ]
 
-post_dict = dict({post['id']: post for post in posts}.items())
+POST_WORK = dict({post['id']: post for post in posts}.items())
